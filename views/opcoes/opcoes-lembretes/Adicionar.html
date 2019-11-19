@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Área do Aluno | Lembretes</title>
+    <link rel="stylesheet" href="../../css/dashboard/all.css">
+
+    <!-- CSS TOAST MESSAGE-->
+    <link rel="stylesheet" href="../../css/dashboard/toast.css">
+
+    <!-- CSS BOOTSTRAP -->
+    <link rel="stylesheet" href="../../bootstrap/node_modules/bootstrap/compiler/bootstrap.css">
+
+    <!-- FONTES -->
+    <link rel="stylesheet" href="../../font/fontawesome/css/all.min.css">
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- CSS DATE-PICKER -->
+    <link href="../../css/dashboard/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <!-- CSS CLOCK-PICKER -->
+    <link rel="stylesheet" href="../../bootstrap/clockpicker/dist/bootstrap-clockpicker.css">
+
+    <!-- CSS DO CONTEÚDO PRINCIPAL -->
+    <link href="../../css/dashboard/mainAdicionar.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="flex-dashboard">
+        <sidebar>
+            <div class="sidebar-title">
+                <img src="../../img/Letra.png">
+
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="liberty">
+                        <i class="fas fa-user"></i>
+                        <a href="/area-aluno/perfil">Perfil</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="far fa-calendar-alt"></i>
+                        <a href="/area-aluno/calendario">Calendário</a>
+                    </li>
+                    <li class="selected">
+                        <i class="far fa-list-alt"></i>
+                        <a href="/area-aluno/lembretes">Lembretes</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="fas fa-book-open"></i>
+                        <a href="/area-aluno/listas-exercicios">Exercícios</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <a href="/area-aluno/monitoria">Monitoria</a>
+                    </li>
+                </ul>
+            </div>
+        </sidebar>
+        <main>
+            <header>
+                <a class="header-home" href="/area-aluno"><i class="fas fa-home"></i> Home</a>
+                <div id="sair">
+                    <a>
+                        <i class="fas fa-sign-out-alt"></i> Sair
+                    </a>
+                </div>
+            </header>
+            <div class="main-content lembrete">
+                <div class="panel-column-lembrete">
+                    <button class="panel panel-50-lembrete" id="btn1" style="outline: none;">Seus Lembretes</button>
+                    <button class="panel panel-50-lembrete" id="btn2">Adicionar Lembretes</button>
+                </div>
+                <a href="/area-aluno/lembretes/meus-lembretes" id="execBtn1"></a>
+                <a href="/area-aluno/lembretes/adicionar-lembretes" id="execBtn2"></a>
+                <div class="content">
+                    <form class="form" id="form-cadastro-lembrete">
+                        <div class="form-group">
+                            <label for="tarefa">
+                                <i class="fas fa-asterisk" style="color: red; display: none;" id="question-red">AFDA</i>
+                                <i class="fas fa-question-circle" id="question-normal"></i> 
+                                Qual a Tarefa</label>
+                            <input type="text" class="form-control" id="input-tarefa" placeholder="Sua Tarefa...">
+                        </div>
+                        <div class="form-group date" id="datepicker" style="display:none;">
+                            <label for="data">
+                                <i class="fas fa-calendar-week"></i> Digite a Data
+                            </label>
+                            <input type="text" class="form-control" id="input-data" placeholder="14/10/2003">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group clockpicker" id="clockpicker" style="display:none;">
+                            <label for="horario">
+                                <i class="far fa-clock"></i> Digite o Horário</label>
+                            <input type="text" class="form-control" id="input-horario" placeholder="09:30">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-time"></span>
+                            </span>
+                        </div>
+                        <div class="form-group" id="localization" style="display:none;">
+                            <label for="localizacao">
+                                <i class="fas fa-search-location"></i> Digite a Localização</label>
+                            <input type="text" class="form-control" id="input-localizacao"
+                                placeholder="Rua dos Manguesais, 238">
+                        </div>
+
+                        <button class="btn btn-adicionar text-white" id="btnAdicionar">
+                            <i class="far fa-plus-square"></i> Adicionar</button>
+                    </form>
+                </div>
+                <div class="canto">
+                    <form class="form-opcoes">
+                        <div class="form-group opcoes">
+                            <label class="toggler-wrapper style-4">
+                                <input type="checkbox" id="chkOption1">
+                                <div class="toggler-slider">
+                                    <div class="toggler-knob"></div>
+                                </div>
+                                <label class="form-check-label label">Adicionar Data</label>
+                            </label>
+                            <div class="form-group opcoes">
+                                <label class="toggler-wrapper style-4">
+                                    <input type="checkbox" id="chkOption2">
+                                    <div class="toggler-slider">
+                                        <div class="toggler-knob"></div>
+                                    </div>
+                                    <label class="form-check-label label">Adicionar Horário</label>
+                                </label>
+                            </div>
+                            <div class="form-group opcoes">
+                                <label class="toggler-wrapper style-4">
+                                    <input type="checkbox" id="chkOption3">
+                                    <div class="toggler-slider">
+                                        <div class="toggler-knob"></div>
+                                    </div>
+                                    <label class="form-check-label label">Adicionar Localização</label>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-message">
+        <span class="close-message"></span>
+        <div class="message">
+            This is an Alert! But these are some junks to see how alert looks in long messages.
+        </div>
+    </div>
+    <!-- TOAST NOTIFICATION -->
+ 
+    </main>
+    </div>
+
+
+    <!-- SCRIPT'S PAGINA-->
+    <script src="../../js/dashboard/trocaLembrete.js"></script>
+    <script src="../../js/dashboard/verifica-opcoes.js"></script>
+    <script src="../../js/dashboard/animateCheckBox.js"></script>
+    <script src="../../js/dashboard/cadastrar-lembrete.js"></script>
+    <script src="../../js/dashboard/sair.js"></script>
+
+    <!-- SCRIPT'S DATE-PICKER -->
+    <script src="../../js/dashboard/bootstrap-datepicker.min.js"></script>
+    <script src="../../js/dashboard/bootstrap-datepicker.pt-BR.min.js" charset="UTF-8"></script>
+    <script src="../../js/dashboard/dpicker-acao.js"></script>
+
+    <!-- SCRIPT'S CLOCK-PICKER -->
+    <script src="../../bootstrap/clockpicker/dist/bootstrap-clockpicker.js"></script>
+    <script src="../../js/dashboard/clpicker-acao.js"></script>
+
+    <!-- SCRIPT BOOTSTRAP -->
+    <script src="../../bootstrap/node_modules/bootstrap/js/src/index.js"></script>
+
+    <!-- SCRIPT FONTES -->
+    <script src="../../font/fontawesome/js/all.min.js"></script>
+</body>
+
+</html>

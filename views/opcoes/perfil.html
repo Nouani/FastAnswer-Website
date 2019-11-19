@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Área do Aluno | Perfil</title>
+    <link rel="stylesheet" href="../css/dashboard/all.css">
+
+    <!-- CSS TOAST MESSAGE-->
+    <link rel="stylesheet" href="../../css/dashboard/toast.css">
+
+    <!-- CSS BOOTSTRAP -->
+    <link rel="stylesheet" href="../bootstrap/node_modules/bootstrap/compiler/bootstrap.css">
+
+    <!-- FONTES -->
+    <link rel="stylesheet" href="../font/fontawesome/css/all.min.css">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="../css/dashboard/mainPerfil.css">
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="flex-dashboard">
+        <sidebar>
+            <div class="sidebar-title">
+                <img src="../img/Letra.png">
+
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="selected">
+                        <i class="fas fa-user"></i>
+                        <a href="/area-aluno/perfil">Perfil</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="far fa-calendar-alt"></i>
+                        <a href="/area-aluno/calendario">Calendário</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="far fa-list-alt"></i>
+                        <a href="/area-aluno/lembretes">Lembretes</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="fas fa-book-open"></i>
+                        <a href="/area-aluno/listas-exercicios">Exercícios</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <a href="/area-aluno/monitoria">Monitoria</a>
+                    </li>
+                </ul>
+            </div>
+        </sidebar>
+        <main>
+            <header>
+                <a class="header-home" href="/area-aluno"><i class="fas fa-home"></i> Home</a>
+                <div id="sair">
+                    <a>
+                        <i class="fas fa-sign-out-alt"></i> Sair
+                    </a>
+                </div>
+            </header>
+            <div class="main-content">
+                <div id="username">
+                    <!-- CARREGADO NO DB -->
+                </div>
+                <hr id="barra">
+                <div class="container" id="formAlterar">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-3">
+                            <div class="text-center">
+                                <img src="../img/profile-padrao.jpg" class="avatar img-circle" alt="avatar">
+                                <input type="file" class="form-control">
+                                <h6>Selecione uma foto diferente da atual</h6>
+                            </div>
+                        </div>
+
+                        <!-- edit form column -->
+                        <div class="col-md-9 personal-info">
+                            <div class="alert alert-info alert-dismissable">
+                                <a class="panel-close close" data-dismiss="alert">×</a>
+                                <i class="fa fa-coffee"></i>
+                                <strong>Atenção!</strong>. Site em desenvolvimento. Pode ser, que algo não funcione
+                                ainda.
+                            </div>
+                            <h3>Informações Pessoais</h3>
+
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Registro Acadêmico</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" type="text" id="input-ra" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Nome Completo</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" type="text" id="input-nome" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Senha Atual <i class="fas fa-asterisk"
+                                            style="color: red; display: none;" id="question-red">AFDA</i></label>
+                                    <div id="question-normal"></div>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" type="password" id="input-senha" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">Nova Senha</label>
+                                    <div class="col-lg-8">
+                                        <input class="form-control" type="password" id="input-senha-nova" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display: none;" id="input-botoes-edicao">
+
+                                    <input type="button" class="btn btn-salvar" value="Salvar Alterações"
+                                        id="botao-salvar">
+                                    <input type="reset" class="btn btn-cancelar" value="Cancelar" id="botao-cancelar">
+                                </div>
+                                <div class="form-group" id="input-botao-editar">
+                                    <input type="button" class="btn-editar" value="Editar Perfil" id="botao-editar">
+                                    <input type="button" class="btn-cancelar" value="Excluir" id="botao-excluir">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-message">
+        <span class="close-message"></span>
+        <div class="message">
+            This is an Alert! But these are some junks to see how alert looks in long messages.
+        </div>
+    </div>
+    <!-- TOAST NOTIFICATION -->
+
+    <!-- SCRIPT'S PÁGINA-->
+    <script src="../js/dashboard/carregar-perfil.js"></script>
+    <script src="../js/dashboard/sair.js"></script>
+
+    <!-- SCRIPT BOOTSTRAP -->
+    <script src="../bootstrap/node_modules/bootstrap/js/src/index.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- SCRIPT FONTES -->
+    <script src="../font/fontawesome/js/all.min.js"></script>
+</body>
+
+</html>

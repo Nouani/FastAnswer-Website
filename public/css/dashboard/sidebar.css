@@ -1,0 +1,107 @@
+.flex-dashboard{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+sidebar {
+    display: block;
+    height: 100%;
+    width: 300px;
+    background-color: white;
+}
+
+/*sidebar {
+    background: linear-gradient(-45deg, #081483, #08b162);
+	background-size: 400% 400%;
+	animation: gradientBG 15s ease infinite;
+}
+
+
+@keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}*/
+
+sidebar .sidebar-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    height: 90px;
+    border: 1px solid rgba(0, 0, 0, .0625);
+    border-right: 0px; 
+}
+
+sidebar .sidebar-title img {
+    height: 70px;
+    width: 150px;
+}
+
+sidebar .sidebar-title h2 {
+    font-size: 16px;
+    margin-top: 8px;
+}
+
+.menu {
+    border-right: 1px solid rgba(0, 0, 0, .0625);
+    
+}
+
+.menu ul{
+    list-style-type: none;
+}
+
+.menu ul li {
+    padding: 20px 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.menu ul .liberty:hover {
+    transform: scale(1.07);
+    transition: transform .5s;
+    
+}
+
+.menu ul .liberty:not(:hover) {
+    transform: scale(1.00);
+    transition: transform .5s;
+}
+
+.menu ul .liberty a:hover {
+    color: black;
+    transition: color .2s;
+}
+
+.menu ul .liberty a:not(:hover) {
+    color:  #d8d2d2;
+    transition: color .2s;
+}
+
+.menu ul li svg {
+    color: #3b09c4;
+    font-size: 25px;
+}
+
+.menu ul li a {
+    color:  #d8d2d2;
+    margin-left: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.selected {
+    background: linear-gradient(135deg, #3a7afc, #7206d8);
+}

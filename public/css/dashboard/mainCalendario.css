@@ -1,0 +1,64 @@
+html,
+body {
+    
+    font-size: 14px;
+}
+
+#calendar-container {
+    position: relative;
+    padding: 10px;
+    height: 100%;
+}
+
+.fc-header-toolbar {
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+
+.btn-adicionar {
+    margin-top: 25px;
+    background: linear-gradient(135deg, #08c787, #27b60af3);
+    color: #fff;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-adicionar:hover {
+    border: none;
+    color: #fff;
+    transform: scale(1.05);
+    transition: .4s;
+}
+
+.btn-adicionar:not(:hover) {
+    border: none;
+    color: #fff;
+    transform: scale(1.0);
+    transition: .3s;
+}
+
+.btn-cancelar {
+    margin-top: 25px;
+    background: linear-gradient(135deg, #c70e08, #d85518f3);
+    color: #fff;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-cancelar:hover {
+    border: none;
+    color: #fff;
+    transform: scale(1.05);
+    transition: .4s;
+}
+
+.btn-cancelar:not(:hover) {
+    border: none;
+    color: #fff;
+    transform: scale(1.0);
+    transition: .3s;
+}

@@ -1,0 +1,7 @@
+html, body, header, #inicio {
+    height: 100%;
+  }
+
+html {
+  scroll-behavior: smooth;
+}

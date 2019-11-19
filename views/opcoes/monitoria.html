@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Área do Aluno | Monitoria</title>
+    <link rel="stylesheet" href="../css/dashboard/all.css">
+
+    <!-- CSS BOOTSTRAP -->
+    <link rel="stylesheet" href="../bootstrap/node_modules/bootstrap/compiler/bootstrap.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css'>
+    <link rel='stylesheet' href='https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/boxicons@2.0.0/css/boxicons.min.css'>
+
+    <!-- FONTES -->
+    <link rel="stylesheet" href="../font/fontawesome/css/all.min.css">
+
+    <!-- JQUERY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="flex-dashboard">
+        <sidebar>
+            <div class="sidebar-title">
+                <img src="../img/Letra.png">
+
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="liberty">
+                        <i class="fas fa-user"></i>
+                        <a href="/area-aluno/perfil">Perfil</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="far fa-calendar-alt"></i>
+                        <a href="/area-aluno/calendario">Calendário</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="far fa-list-alt"></i>
+                        <a href="/area-aluno/lembretes">Lembretes</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="fas fa-book-open"></i>
+                        <a href="/area-aluno/listas-exercicios">Exercícios</a>
+                    </li>
+                    <li class="selected">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <a href="/area-aluno/monitoria">Monitoria</a>
+                    </li>
+                </ul>
+            </div>
+        </sidebar>
+        <main>
+            <header>
+                <a class="header-home" href="/area-aluno"><i class="fas fa-home"></i> Home</a>
+                <div id="sair">
+                    <a>
+                        <i class="fas fa-sign-out-alt"></i> Sair
+                    </a>
+                </div>
+            </header>
+            <div class="main-content">
+                <table id="table-monitores" class="table table-hover responsive nowrap" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Registro Acadêmico</th>
+                            <th>Disciplina</th>
+                            <th>Status</th>
+                            <th>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpo-table">
+                        <!--<tr>
+                            <td>
+                                <a href="#">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-blue mr-3">EB</div>
+
+                                        <div class="">
+                                            <p class="font-weight-bold mb-0">Ethan Black</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>(784) 667 8768</td>
+                            <td>Designer</td>
+                            <td>
+                                <div class="badge badge-danger badge-danger-alt">Offline</div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-icon" type="button" id="dropdownMenuButton2"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bx bx-dots-horizontal-rounded" data-toggle="tooltip"
+                                            data-placement="top" title="Actions"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                        <a class="dropdown-item" href="#"><i class="bx bxs-pencil mr-2"></i>
+                                            Edit Profile</a>
+                                        <a class="dropdown-item text-danger" href="#"><i class="bx bxs-trash mr-2"></i>
+                                            Remove</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="#">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-blue mr-3">EB</div>
+
+                                        <div class="">
+                                            <p class="font-weight-bold mb-0">Ethan Black</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>(784) 667 8768</td>
+                            <td>Designer</td>
+                            <td>
+                                <div class="badge badge-danger badge-danger-alt">Offline</div>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-icon" type="button" id="dropdownMenuButton2"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bx bx-dots-horizontal-rounded" data-toggle="tooltip"
+                                            title="Actions"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                        <a class="dropdown-item" href="#"><i class="bx bxs-pencil mr-2"></i>
+                                            Edit Profile</a>
+                                        <a class="dropdown-item text-danger" href="#"><i class="bx bxs-trash mr-2"></i>
+                                            Remove</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- SCRIPT'S PÁGINA -->
+    <script src="../js/dashboard/sair.js"></script>
+    <script src="../js/dashboard/carregar-monitores.js"></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/js/jquery.dataTables.min.js'></script>
+    <script src='https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js'></script>
+    <script src='https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js'></script>
+    <!-- SCRIPT BOOTSTRAP -->
+    <script src="../bootstrap/node_modules/bootstrap/js/src/index.js"></script>
+
+    <!-- SCRIPT FONTES -->
+    <script src="../font/fontawesome/js/all.min.js"></script>
+</body>
+
+</html>

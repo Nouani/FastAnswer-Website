@@ -1,0 +1,39 @@
+.btn:hover {
+	transform: scale(1.05);
+	transition: transform .3s;
+}
+
+.btn:not(:hover) {
+	transform: scale(1.00);
+	transition: transform .3s;
+}
+
+.btn-adicionar {
+	background: linear-gradient(135deg, #5a91ff, #a347ff);
+	color: white;
+}
+
+.form-adicionar {
+	padding: 20px;
+	background-color: white;
+	border-radius: 10px; 
+	
+}
+
+.form-opcoes {
+    padding: 20px;
+	background-color: white;
+	box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
+    border-radius: 5px; 
+    width: 260px;
+}
+
+.canto {
+    position: fixed;
+    right: 20pt;
+    bottom: 20pt;
+}
+
+.opcoes {
+    margin: 0.5px;
+}

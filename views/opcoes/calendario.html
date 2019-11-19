@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Área do Aluno | Calendario</title>
+
+    <link rel="stylesheet" href="../css/dashboard/all.css">
+    <!--<link rel="stylesheet" href="../css/dashboard/radio-color-picker.css">-->
+
+    <!-- TOAST MESSAGE-->
+    <link rel="stylesheet" href="../css/dashboard/toast-modal.css">
+
+    <!-- CSS BOOTSTRAP -->
+    <link rel="stylesheet" href="../bootstrap/node_modules/bootstrap/compiler/bootstrap.css">
+
+    <!-- CSS CALENDAR -->
+    <link href='../calendar/css-js/core/main.css' rel='stylesheet' />
+    <link href='../calendar/css-js/daygrid/main.css' rel='stylesheet' />
+    <link href='../calendar/css-js/timegrid/main.css' rel='stylesheet' />
+    <link href='../calendar/css-js/list/main.css' rel='stylesheet' />
+
+    <!-- MAIN CSS DA PAGINA -->
+    <link href="../css/dashboard/mainCalendario.css" rel="stylesheet">
+
+    <!-- FONTES -->
+    <link rel="stylesheet" href="../font/fontawesome/css/all.min.css">
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- CSS CLOCK-PICKER -->
+    <link rel="stylesheet" href="../../bootstrap/clockpicker/dist/bootstrap-clockpicker.css">
+</head>
+
+<body>
+    <div class="flex-dashboard">
+        <sidebar>
+            <div class="sidebar-title">
+                <img src="../img/Letra.png">
+
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="liberty">
+                        <i class="fas fa-user"></i>
+                        <a href="/area-aluno/perfil">Perfil</a>
+                    </li>
+                    <li class="selected">
+                        <i class="far fa-calendar-alt"></i>
+                        <a href="/area-aluno/calendario">Calendário</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="far fa-list-alt"></i>
+                        <a href="/area-aluno/lembretes">Lembretes</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="fas fa-book-open"></i>
+                        <a href="/area-aluno/listas-exercicios">Exercícios</a>
+                    </li>
+                    <li class="liberty">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <a href="/area-aluno/monitoria">Monitoria</a>
+                    </li>
+                </ul>
+            </div>
+        </sidebar>
+        <main>
+            <header>
+                <a class="header-home" href="/area-aluno"><i class="fas fa-home"></i> Home</a>
+                <div id="sair">
+                    <a>
+                        <i class="fas fa-sign-out-alt"></i> Sair
+                    </a>
+                </div>
+            </header>
+            <div class="main-content">
+                <div id='calendar-container'>
+                    <div id='calendar'></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL DETALHES -->
+    <div class="modal fade" id="modal-info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Detalhes do Evento</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4 id="titulo-evento"></h4>
+                    <dl class="row">
+                        <dt class="col-sm-3">Data de Início</dt>
+                        <dd class="col-sm-9" id="data-inicio"></dd>
+                        <dt class="col-sm-3">Data de Término</dt>
+                        <dd class="col-sm-9" id="data-termino"></dd>
+                        <dt class="col-sm-3">Link do Evento</dt>
+                        <dd class="col-sm-9"><a href="" id="link-evento"></a></dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL DETALHES -->
+
+    <!-- MODAL CADASTRO -->
+    <div class="modal fade" id="modal-cadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalCenterTitle">Adicionar Evento</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="tarefa">
+                            <i class="fas fa-asterisk" style="color: red; display: none;" id="question-red">AFDA</i>
+                            <i class="fas fa-question-circle" id="question-normal"></i>
+                            Qual o Evento</label>
+                        <input type="text" class="form-control" id="input-evento" placeholder="Seu Evento...">
+                    </div>
+                    <div class="form-group">
+                        <label for="tarefa">
+                            <i class="fas fa-link"></i>
+                            Link do Evento</label>
+                        <input type="text" class="form-control" id="input-link" placeholder="https://site.com.br">
+                    </div>
+                    <div class="row">
+                        <div class="col-6 col-sm-4">
+                            <div class="form-group">
+                                <label for="tarefa">
+                                    <i class="far fa-calendar"></i>
+                                    Data de Início</label>
+                                <input type="text" class="form-control" id="input-data-inicio" disabled>
+                            </div>
+                        </div>
+                         <div class="col-6 col-sm-4">
+                            <div class="form-group clockpicker" id="clockpicker">
+                                <label for="horario">
+                                    <i class="far fa-clock"></i> Horário de Início
+                                </label>
+                                <input type="text" class="form-control" id="input-horario-inicio" value="00:00">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Force next columns to break to new line at md breakpoint and up -->
+                        <div class="w-100 d-none d-md-block"></div>
+
+                        <div class="col-6 col-sm-4">
+                            <div class="form-group">
+                                <label for="tarefa">
+                                    <i class="fas fa-clock"></i>
+                                    Data de Término</label>
+                                <input type="text" class="form-control" id="input-data-fim" disabled>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <div class="form-group clockpicker" id="clockpicker">
+                                <label for="horario">
+                                    <i class="fas fa-question-circle" id="question-normal"></i> Horário de Término
+                                </label>
+                                <input type="text" class="form-control" id="input-horario-fim" value="00:00">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="seletor-color">
+                        <div id="content-radios">
+                            <label class="orange">
+                                <input class="input-color" type="radio" name="color" value="orange"
+                                    data-id="botao-orange" data-color="darkorange">
+                                <div class="layer"></div>
+                                <div class="button" id="botao-orange"><span></span></div>
+                            </label>
+
+                            <label class="amber">
+                                <input class="input-color" type="radio" name="color" value="amber" data-id="botao-amber"
+                                    data-color="gold">
+                                <div class="layer"></div>
+                                <div class="button" id="botao-amber"><span></span></div>
+                            </label>
+
+                            <label class="lime">
+                                <input class="input-color" type="radio" name="color" value="lime" data-id="botao-lime"
+                                    data-color="limegreen">
+                                <div class="layer"></div>
+                                <div class="button" id="botao-lime"><span></span></div>
+                            </label>
+
+                            <label class="teal">
+                                <input class="input-color" type="radio" name="color" value="teal" data-id="botao-teal"
+                                    data-color="teal">
+                                <div class="layer"></div>
+                                <div class="button" id="botao-teal"><span></span></div>
+                            </label>
+
+                            <label class="blue">
+                                <input class="input-color" type="radio" name="color" value="blue" data-id="botao-blue"
+                                    data-color="dodgerblue">
+                                <div class="layer"></div>
+                                <div class="button" id="botao-blue"><span></span></div>
+                            </label>
+
+                            <label class="indigo">
+                                <input class="input-color" type="radio" name="color" value="indigo"
+                                    data-id="botao-indigo" data-color="royalblue">
+                                <div class="layer"></div>
+                                <div class="button" id="botao-indigo"><span></span></div>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-adicionar">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL CADASTRO -->
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-message">
+        <span class="close-message"></span>
+        <div class="message">
+            This is an Alert! But these are some junks to see how alert looks in long messages.
+        </div>
+    </div>
+    <!-- TOAST NOTIFICATION -->
+
+    <!-- SCRIPT'S PÁGINA -->
+    <script src="../js/dashboard/color-picker.js"></script>
+    <script src="../js/dashboard/sair.js"></script>
+
+    <!-- SCRIPT'S CLOCK-PICKER -->
+    <script src="../bootstrap/clockpicker/dist/bootstrap-clockpicker-2.js"></script>
+    <script src="../js/dashboard/clpicker-acao-2.js"></script>
+
+    <!-- SCRIPT'S BOOTSTRAP -->
+    <script src="../bootstrap/node_modules/bootstrap/js/src/index.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- SCRIPT'S CALENDAR -->
+    <script src="../calendar/lang/pt-br.js"></script>
+    <script src='../calendar/css-js/core/main.js'></script>
+    <script src='../calendar/css-js/interaction/main.js'></script>
+    <script src='../calendar/css-js/daygrid/main.js'></script>
+    <script src='../calendar/css-js/timegrid/main.js'></script>
+    <script src='../calendar/css-js/list/main.js'></script>
+    <script src="../js/dashboard/calendario.js"></script>
+
+    <!-- SCRIPT FONTES -->
+    <script src="../font/fontawesome/js/all.min.js"></script>
+</body>
+
+</html>

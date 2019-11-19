@@ -1,0 +1,44 @@
+.flex-dashboard header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+    background-color: white;
+    padding: 10px 30px;
+    border: 1px solid rgba(0, 0, 0, .0625);
+}
+
+.flex-dashboard header a {
+    text-decoration: none;
+    color: #72777a;
+    transition: 0.8s;
+    padding: 5px;
+    border-radius: 7px;
+}
+
+.flex-dashboard header .header-home:hover{
+    background: #6e8efb;
+	color: white;
+}
+
+.flex-dashboard header .header-home:hover > svg{
+	color: white;
+}
+
+.flex-dashboard header a > svg {
+    color: #6e8efb;
+    transition: 0.8s;
+}
+
+div.home a {
+    padding: 10px;
+    background: linear-gradient(135deg, #3a7afc, #7206d8);
+    color: white;
+    border-radius: 5px;
+}
+
+#sair {
+    cursor: pointer;
+}
+

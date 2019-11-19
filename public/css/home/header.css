@@ -1,0 +1,16 @@
+#inicio {
+    background: url("../../img/Educação.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  
+  #divisaoTitulo {
+    border-top: 1px solid #8c8b8b;
+    border-bottom: 1px solid #fff;
+  }
+  
+  .jumbotron {
+    background: radial-gradient(ellipse at bottom, #169bf5, #8c09c0);
+  }

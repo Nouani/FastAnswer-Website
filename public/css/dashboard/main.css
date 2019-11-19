@@ -1,0 +1,167 @@
+main {
+    display: block;
+    height: 100%;
+    background-color: #f7f7f7;
+    width: calc(100% - 300px);
+}
+
+main .main-content {
+    padding: 30px;
+    width: 100%;
+    height: calc(100% - 90px);
+    overflow-y: auto;
+}
+
+.content {
+	padding: 30px;
+    width: 100%;
+    /*height: calc(100% - 300px);*/
+	overflow-y: auto;
+}
+
+.main-content::-webkit-scrollbar-track
+{
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+
+.main-content::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+.main-content::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-image: -webkit-gradient(linear,
+									   left bottom,
+									   left top,
+									   color-stop(0.44, rgb(122,153,217)),
+									   color-stop(0.72, rgb(73,125,189)),
+									   color-stop(0.86, rgb(28,58,148)));
+}
+
+/* ABA LEMBRETES */
+.lembrete .panel {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	border: 1px solid #ccc;
+	margin: 5px 0;
+}
+
+.panel-a {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.panel-column-lembrete {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+}
+
+.panel-column-lembrete button:focus{	
+	outline: none;	
+}
+
+.panel-50-lembrete {
+	width: 48%;
+}
+
+.panel-column-lembrete button {
+	color: white;
+	height: 90px;
+	background: linear-gradient(135deg, #3a7afc, #7206d8);
+	font-size: 16px;
+	border-radius: 10px;
+}
+
+.panel-column-lembrete button:hover {
+    transform: scale(1.05);
+    transition: transform .5s;
+}
+
+.panel-column-lembrete button:not(:hover) {
+    transform: scale(1.00);
+	transition: transform .5s;
+}
+
+
+/* ABA LEMBRETES */
+
+/* ABA EXERCICIOS */
+.exercicios .panel {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	border: 1px solid #ccc;
+	margin: 10px 0;
+}
+
+.panel-row-exercicios {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+}
+
+.panel-50-exercicios {
+	width: 48%;
+}
+
+.panel-row-exercicios button {
+	color: white;
+	height: 60px;
+	background: linear-gradient(135deg, #3a7afc, #7206d8);
+	font-size: 16px;
+	border-radius: 10px;
+	margin: 10px;
+	margin:0 10px 0 0;
+}
+
+.panel-row-exercicios button:hover {
+    transform: scale(1.05);
+    transition: transform .5s;
+}
+
+.panel-row-exercicios button:not(:hover) {
+    transform: scale(1.00);
+	transition: transform .5s;
+}
+/* ABA EXERCICIOS */
+
+.btn:hover {
+	transform: scale(1.05);
+	transition: transform .3s;
+}
+
+.btn:not(:hover) {
+	transform: scale(1.00);
+	transition: transform .3s;
+}
+
+.btn-adicionar {
+	background: linear-gradient(135deg, #5a91ff, #a347ff);
+	color: white;
+}
+
+.form {
+	padding: 20px;
+	background-color: white;
+	box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
+	border-radius: 5px; 
+}
