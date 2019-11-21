@@ -13,7 +13,8 @@ $(document).ready(function () {
 function atualizarMonitores() {
     console.log("atualizou");
     console.log(monitoresANotificar);
-    var objMonitores = []
+    var objMonitores = [];
+    var nomeMonitores = [];
     objTable.innerHTML = '';
     $.getJSON('/carregar-materias', function (materias) {
         for (var materia of materias) {
@@ -47,6 +48,19 @@ function atualizarMonitores() {
                 }
                 for (var i = 0; i < objMonitores.length; i++) {
                     objTable.innerHTML += carregarComponentes(objMonitores[i].nome, objMonitores[i].ra, objMonitores[i].materia, objMonitores[i].atividade, i);
+                    for (var k = 0; k < monitoresANotificar.length; k++){
+                        if (monitoresANotificar[k] == objMonitores[i].ra){
+                            if (objMonitores[i].atividade == 'online'){
+                                nomeMonitores.push(objMonitores[i].nome);
+                            }
+                        }
+                    }
+                }
+                console.log(nomeMonitores);
+                if (nomeMonitores.length > 0){
+                    for (var i = 0; i < nomeMonitores.length; i++){
+                        n.show(`O monitor: ${nomeMonitores[i]} está online`, 'danger');
+                    }
                 }
                 atribuirClick();
             })
@@ -63,6 +77,17 @@ function carregarComponentes(nome, ra, disciplina, status, contador) {
     } else {
         opcao = 'danger';
     }
+
+    var displayAtivar = '';
+    var displayDesativar = 'none';
+
+    for (var i = 0; i < monitoresANotificar.length; i++){
+        if (monitoresANotificar[i] == ra){
+            displayAtivar = 'none';
+            displayDesativar = '';
+        }
+    }
+
     ret += `<tr>
                 <td>
                     <a href="#">
@@ -88,10 +113,10 @@ function carregarComponentes(nome, ra, disciplina, status, contador) {
                                 title="Actions"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                            <div class="notification dropdown-item" data-ra="${ra}" data-id="desativa${contador}">
+                            <div id="ativa${contador}" class="notification dropdown-item" style="display: ${displayAtivar};" data-ra="${ra}" data-id="desativa${contador}" data-status="${status}">
                                 <i class="far fa-bell"></i> Avisar quando estiver disponível
                             </div>
-                            <div id="desativa${contador}" class="desativa dropdown-item" style="display: none;">
+                            <div id="desativa${contador}" class="desativa dropdown-item" style="display: ${displayDesativar};" data-ra="${ra}" data-id="ativa${contador}">
                                 <i class="fas fa-minus-circle" style="color:  rgb(202, 29, 29);"></i> Desativar
                             </div>
                         </div>
@@ -119,34 +144,57 @@ function getIniciais(nome) {
     return ret;
 }
 
-function atribuirClick(){
-    for (var i = 0; i < objDropdowns.length; i++){
+function atribuirClick() {
+    for (var i = 0; i < objDropdowns.length; i++) {
         objDropdowns[i].addEventListener('click', active);
     }
-    for (var i = 0; i < objDropdownsDesativar.length; i++){
+    for (var i = 0; i < objDropdownsDesativar.length; i++) {
         objDropdownsDesativar[i].addEventListener('click', desactive);
     }
 }
 
-function active(){
+function active() {
     let ra = this.getAttribute("data-ra");
+    let status = this.getAttribute("data-status");
     let idDiv = this.getAttribute("data-id");
 
-    if (objDropdowns.length != monitoresANotificar.length){
-        var divDesativar = document.getElementById(idDiv);
+    if (objDropdowns.length != monitoresANotificar.length) {
+        if (status != "online") {
+            var divDesativar = document.getElementById(idDiv);
 
-        this.style.display = 'none';
-        divDesativar.style.display = '';
+            this.style.display = 'none';
+            divDesativar.style.display = '';
 
-        monitoresANotificar.push(ra);
+            // testar
+
+            monitoresANotificar.push(ra);
+
+            n.show(`Você será notificado quando o monitor estiver online`, 'success');
+        } else {
+            n.show(`Este monitor já está online!`, 'danger');
+        }
     } else {
         //n.show('Você já será notificado deste monitor', 'danger');
     }
     console.log(monitoresANotificar);
 }
 
-function desactive(){
-    console.log("das");
+function desactive() {
+    let ra = this.getAttribute("data-ra");
+    let idDiv = this.getAttribute("data-id");
+    console.log(idDiv);
+
+    console.log(monitoresANotificar);
+    for (var i = 0; i < monitoresANotificar.length; i++){
+        if (monitoresANotificar[i] == ra){
+            var divAtivar = document.getElementById(idDiv);
+            monitoresANotificar.splice(i, 1);
+
+            divAtivar.style.display = '';
+            this.style.display = 'none';
+        }
+    }
+    console.log(monitoresANotificar);
 }
 
 
