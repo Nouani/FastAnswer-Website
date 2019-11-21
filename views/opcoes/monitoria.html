@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Área do Aluno | Monitoria</title>
+
     <link rel="stylesheet" href="../css/dashboard/all.css">
+
+    <!-- CSS TOAST MESSAGE-->
+    <link rel="stylesheet" href="../../css/dashboard/toast.css">
 
     <!-- CSS BOOTSTRAP -->
     <link rel="stylesheet" href="../bootstrap/node_modules/bootstrap/compiler/bootstrap.css">
@@ -14,6 +18,9 @@
     <link rel='stylesheet' href='https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css'>
     <link rel='stylesheet' href='https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css'>
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/boxicons@2.0.0/css/boxicons.min.css'>
+
+    <!-- MAIN CSS DA PÁGINA -->
+    <link rel="stylesheet" href="../css/dashboard/mainMonitoria.css">
 
     <!-- FONTES -->
     <link rel="stylesheet" href="../font/fontawesome/css/all.min.css">
@@ -76,11 +83,21 @@
                     </thead>
                     <tbody id="corpo-table">
                         <!-- CARREGADO NO DB -->
+
                     </tbody>
                 </table>
             </div>
         </main>
     </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-message">
+        <span class="close-message"></span>
+        <div class="message">
+            This is an Alert! But these are some junks to see how alert looks in long messages.
+        </div>
+    </div>
+    <!-- TOAST NOTIFICATION -->
 
     <!-- SCRIPT'S PÁGINA -->
     <script src="../js/dashboard/sair.js"></script>
