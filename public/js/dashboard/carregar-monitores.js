@@ -11,7 +11,6 @@ $(document).ready(function () {
 })
 
 function atualizarMonitores() {
-    console.log("atualizou");
     console.log(monitoresANotificar);
     var objMonitores = [];
     var nomeMonitores = [];
@@ -27,7 +26,6 @@ function atualizarMonitores() {
             }
             objMonitores.push(objMonitor);
         }
-        console.log(objMonitores);
         $.getJSON('/carregar-monitores', function (monitores) {
             for (var i = 0; i < objMonitores.length; i++) {
                 for (monitor of monitores) {
@@ -37,7 +35,6 @@ function atualizarMonitores() {
                     }
                 }
             }
-            console.log(objMonitores);
             $.getJSON('/carregar-alunos', function (alunos) {
                 for (var i = 0; i < objMonitores.length; i++) {
                     for (aluno of alunos) {
@@ -46,6 +43,22 @@ function atualizarMonitores() {
                         }
                     }
                 }
+                console.log(nomeMonitores);
+                if (nomeMonitores.length > 0){
+                    for (var i = 0; i < nomeMonitores.length; i++){
+                        monitoresANotificar.splice(i, 1);
+                        for (var k = 0; k < monitoresANotificar.length; k++){
+                            if (monitoresANotificar[k] == nomeMonitores[i]){
+                                monitoresANotificar.splice(k, 1);
+                            }
+                        }
+                        /*setTimeout(function(){
+                            n.show(`O monitor: ${nomeMonitores[i]} está online`, 'success');
+                        }, 3000)*/
+                    }
+                }
+                console.log(monitoresANotificar);
+                
                 for (var i = 0; i < objMonitores.length; i++) {
                     objTable.innerHTML += carregarComponentes(objMonitores[i].nome, objMonitores[i].ra, objMonitores[i].materia, objMonitores[i].atividade, i);
                     for (var k = 0; k < monitoresANotificar.length; k++){
@@ -56,12 +69,7 @@ function atualizarMonitores() {
                         }
                     }
                 }
-                console.log(nomeMonitores);
-                if (nomeMonitores.length > 0){
-                    for (var i = 0; i < nomeMonitores.length; i++){
-                        n.show(`O monitor: ${nomeMonitores[i]} está online`, 'danger');
-                    }
-                }
+                
                 atribuirClick();
             })
         });
@@ -182,7 +190,6 @@ function active() {
 function desactive() {
     let ra = this.getAttribute("data-ra");
     let idDiv = this.getAttribute("data-id");
-    console.log(idDiv);
 
     console.log(monitoresANotificar);
     for (var i = 0; i < monitoresANotificar.length; i++){
