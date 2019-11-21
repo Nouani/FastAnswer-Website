@@ -195,7 +195,7 @@ module.exports = (app) => {
                 res.json({ mensagem: 'retorno' });
             }
         });
-    })
+    });
 
     app.get('/carregar-monitores', (req, res) => {
         const monitorDao = new MonitorDao(conexao);
