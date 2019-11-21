@@ -204,16 +204,16 @@ module.exports = (app) => {
         });
     });
 
-    app.get('/carregar-materias/:codMonitor?', (req, res) => {
-        const materiaDao = new MateriaDao(conexao, req.params.codMonitor);
+    app.get('/carregar-materias', (req, res) => {
+        const materiaDao = new MateriaDao(conexao, null);
         materiaDao.lista(function (erro, resultados) {
             res.json(resultados["recordset"]);
         });
     });
 
-    app.get('/carregar-aluno-monitor/:raMonitor?', (req, res) => {
-        const alunoDao = new AlunoDao(conexao, req.params.raMonitor);
-        alunoDao.listaPeloRA(function (erro, resultados) {
+    app.get('/carregar-alunos', (req, res) => {
+        const alunoDao = new AlunoDao(conexao, null);
+        alunoDao.lista(function (erro, resultados) {
             res.json(resultados["recordset"]);
         });
     })

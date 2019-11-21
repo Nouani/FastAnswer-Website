@@ -7,7 +7,7 @@ class EventoDao {
     }
 
     lista(callback) {
-        this._db.query('select * from Materias where CodMonitor ='+this.codMonitor,
+        this._db.query('select * from Materias',
             function (err, recordset) {
                 callback(err, recordset);
             })

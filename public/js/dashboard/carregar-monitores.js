@@ -1,21 +1,60 @@
 var objTable = document.getElementById('corpo-table');
 
 $(document).ready(function(){
-    $.getJSON('/carregar-monitores', function(monitores){
+    
+    var objMonitores = []
+    $.getJSON('/carregar-materias', function(materias){
+        for (var materia of materias){
+            var objMonitor = {
+                codMonitor: materia.CodMonitor,
+                ra: '',
+                nome: '',
+                materia: materia.Nome,
+                atividade: '',
+            }
+            objMonitores.push(objMonitor);
+        }
+        console.log(objMonitores);
+        $.getJSON('/carregar-monitores', function(monitores){
+            for (var i = 0; i < objMonitores.length; i++){
+                for (monitor of monitores){
+                    if (objMonitores[i].codMonitor == monitor.CodMonitor){
+                        objMonitores[i].ra = monitor.RA;
+                        objMonitores[i].atividade = monitor.Atividade;
+                    }
+                }
+            }
+            console.log(objMonitores);
+            $.getJSON('/carregar-alunos', function(alunos){
+                for (var i = 0; i < objMonitores.length; i++){
+                    for (aluno of alunos){
+                        if (objMonitores[i].ra == aluno.RA){
+                            objMonitores[i].nome = aluno.Nome;
+                        }
+                    }
+                }
+                for (var i = 0; i < objMonitores.length; i++){
+                    objTable.innerHTML += carregarComponentes(objMonitores[i].nome, objMonitores[i].ra, objMonitores[i].materia, objMonitores[i].atividade);
+                }
+            })
+        });
+    });
+    /*$.getJSON('/carregar-monitores', function(monitores){
         for (var monitor of monitores){
-            console.log("teste1");
+            console.log(monitor.RA);
             $.getJSON('/carregar-aluno-monitor/'+monitor.RA, function(alunos){
                 for (var aluno of alunos){
-                    console.log(alunos);
-                    console.log("teste2");
+                    console.log(aluno);
+                    console.log(monitor.CodMonitor);
                     $.getJSON('/carregar-materias/'+monitor.CodMonitor, function(materias){
                         console.log(materias);
+                        console.log(aluno.Nome +''+ monitor.RA +''+ materias[0].Nome +''+ monitor.Atividade);
                         objTable.innerHTML += carregarComponentes(aluno.Nome, monitor.RA, materias[0].Nome, monitor.Atividade);
                     })   
                 }
             })
         }
-    })
+    })*/
 })
 
 function carregarComponentes(nome, ra, disciplina, status){
