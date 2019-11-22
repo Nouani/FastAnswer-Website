@@ -5,6 +5,8 @@ var objTable = document.getElementById('corpo-table');
 var objDropdowns = document.getElementsByClassName('notification');
 var objDropdownsDesativar = document.getElementsByClassName('desativa');
 
+var tempoToast = 2000;
+
 $(document).ready(function () {
     atualizarMonitores();
     setInterval(atualizarMonitores, 30000);
@@ -43,33 +45,46 @@ function atualizarMonitores() {
                         }
                     }
                 }
+                for (var i = 0; i < objMonitores.length; i++) {
+                    for (var k = 0; k < monitoresANotificar.length; k++) {
+                        if (monitoresANotificar[k] == objMonitores[i].ra) {
+                            if (objMonitores[i].atividade == 'online'){
+                                var obj = {
+                                    ra: objMonitores[i].ra,
+                                    nome: objMonitores[i].nome
+                                }
+                                nomeMonitores.push(obj);
+                            }
+                        }
+                    }
+                }
+
                 console.log(nomeMonitores);
-                if (nomeMonitores.length > 0){
-                    for (var i = 0; i < nomeMonitores.length; i++){
-                        monitoresANotificar.splice(i, 1);
-                        for (var k = 0; k < monitoresANotificar.length; k++){
-                            if (monitoresANotificar[k] == nomeMonitores[i]){
+                ret = '';
+                if (nomeMonitores.length > 0) {
+                    for (var i = 0; i < nomeMonitores.length; i++) {
+                        //monitoresANotificar.splice(i, 1);
+                        for (var k = 0; k < monitoresANotificar.length; k++) {
+                            if (monitoresANotificar[k] == nomeMonitores[i].ra) {
                                 monitoresANotificar.splice(k, 1);
                             }
                         }
-                        /*setTimeout(function(){
-                            n.show(`O monitor: ${nomeMonitores[i]} está online`, 'success');
-                        }, 3000)*/
+                        ret += nomeMonitores[i].nome + ', ';
+                    }
+                    if (nomeMonitores.length > 1){
+                        tempoToast = 15000;
+                        n.show(`Os monitores ${ret} estão online`, 'success');
+                    } else {
+                        tempoToast = 3000;
+                        n.show(`O monitor ${nomeMonitores[0].nome} está online`, 'success');
                     }
                 }
                 console.log(monitoresANotificar);
-                
+
                 for (var i = 0; i < objMonitores.length; i++) {
                     objTable.innerHTML += carregarComponentes(objMonitores[i].nome, objMonitores[i].ra, objMonitores[i].materia, objMonitores[i].atividade, i);
-                    for (var k = 0; k < monitoresANotificar.length; k++){
-                        if (monitoresANotificar[k] == objMonitores[i].ra){
-                            if (objMonitores[i].atividade == 'online'){
-                                nomeMonitores.push(objMonitores[i].nome);
-                            }
-                        }
-                    }
                 }
-                
+
                 atribuirClick();
             })
         });
@@ -89,8 +104,8 @@ function carregarComponentes(nome, ra, disciplina, status, contador) {
     var displayAtivar = '';
     var displayDesativar = 'none';
 
-    for (var i = 0; i < monitoresANotificar.length; i++){
-        if (monitoresANotificar[i] == ra){
+    for (var i = 0; i < monitoresANotificar.length; i++) {
+        if (monitoresANotificar[i] == ra) {
             displayAtivar = 'none';
             displayDesativar = '';
         }
@@ -157,7 +172,7 @@ function atribuirClick() {
         objDropdowns[i].addEventListener('click', active);
     }
     for (var i = 0; i < objDropdownsDesativar.length; i++) {
-        objDropdownsDesativar[i].addEventListener('click', desactive);
+        objDropdownsDesativar[i].addEventListener('click', disable);
     }
 }
 
@@ -187,13 +202,13 @@ function active() {
     console.log(monitoresANotificar);
 }
 
-function desactive() {
+function disable() {
     let ra = this.getAttribute("data-ra");
     let idDiv = this.getAttribute("data-id");
 
     console.log(monitoresANotificar);
-    for (var i = 0; i < monitoresANotificar.length; i++){
-        if (monitoresANotificar[i] == ra){
+    for (var i = 0; i < monitoresANotificar.length; i++) {
+        if (monitoresANotificar[i] == ra) {
             var divAtivar = document.getElementById(idDiv);
             monitoresANotificar.splice(i, 1);
 
@@ -212,7 +227,7 @@ var n = new Notif({
     topPos: 10,
     classNames: 'success danger',
     autoClose: true,
-    autoCloseTimeout: 2000
+    autoCloseTimeout: 4000
 });
 
 function Notif(option) {
