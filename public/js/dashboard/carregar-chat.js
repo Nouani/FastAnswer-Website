@@ -10,6 +10,8 @@ $(document).ready(function () {
 
         var mensagemDigitada = objInputMsg.value;
         var ordemMensagemNova = objsClass.length + 1;
+
+        objInputMsg.value = '';
         if (mensagemDigitada) {
             $.getJSON('/get-dados-chat', function (dados) {
                 objMensagem = {
