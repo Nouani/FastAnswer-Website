@@ -17,6 +17,7 @@ module.exports = (app) => {
     var dadosChat = {
         raAluno: '19190',
         codMonitor: '69',
+        nomeAluno: 'Matheus Seiji',
         nomeMonitor: 'Enzo Furegatti Spinella',
     }
 
@@ -147,7 +148,7 @@ module.exports = (app) => {
 
     app.get('/excluir-lembrete/:chavePK?', (req, res) => {
         var chavePK = req.params.chavePK;
-        
+
         const lembreteDao = new LembreteDao(conexao, dadosAluno.ra);
         lembreteDao.deletar(chavePK, function (erro) {
             if (erro) {
@@ -227,14 +228,15 @@ module.exports = (app) => {
     app.get('/set-dados-chat/:raMonitor?', (req, res) => {
         const alunoDao = new AlunoDao(conexao, req.params.raMonitor);
         const monitorDao = new MonitorDao(conexao, req.params.raMonitor);
-        
+
         monitorDao.listaPeloRA(function (erro, resultados) {
-            for (var monitor of resultados["recordset"]){
+            for (var monitor of resultados["recordset"]) {
                 dadosChat.raAluno = dadosAluno.ra;
                 dadosChat.codMonitor = monitor.CodMonitor;
             }
-            alunoDao.listaPeloRA(function(err, result){
-                for (var aluno of result["recordset"]){
+            alunoDao.listaPeloRA(function (err, result) {
+                for (var aluno of result["recordset"]) {
+                    dadosChat.nomeAluno = dadosAluno.nome;
                     dadosChat.nomeMonitor = aluno.Nome;
                 }
                 res.json(dadosChat);
@@ -247,19 +249,36 @@ module.exports = (app) => {
     });
 
     app.get('/carregar-mensagens-aluno', (req, res) => {
-         const mensagemAlunoDao = new MensagemAlunoDao(conexao, dadosChat.raAluno, dadosChat.codMonitor);
-         mensagemAlunoDao.listaPeloRA(function(erro, resultados){
-             res.json(resultados["recordset"]);
-         })
+        const mensagemAlunoDao = new MensagemAlunoDao(conexao, dadosChat.raAluno, dadosChat.codMonitor);
+        mensagemAlunoDao.listaPeloRA(function (erro, resultados) {
+            res.json(resultados["recordset"]);
+        })
     });
 
     app.get('/carregar-mensagens-monitor', (req, res) => {
         const mensagemMonitorDao = new MensagemMonitorDao(conexao, dadosChat.raAluno, dadosChat.codMonitor);
-        mensagemMonitorDao.listaPeloRA(function(erro, resultados){
+        mensagemMonitorDao.listaPeloRA(function (erro, resultados) {
             res.json(resultados["recordset"]);
         })
-   });
+    });
 
+    app.get('/enviar-mensagem/:ra?/:mensagem?/:codMonitor?/:ordemMensagem?', (req, res) => {
+        objMensagem = {
+            ra: req.params.ra,
+            mensagem: req.params.mensagem,
+            codMonitor: req.params.codMonitor,
+            ordemMensagem: req.params.ordemMensagem
+        }
+        const mensagemAlunoDao = new MensagemAlunoDao(conexao, null);
+        mensagemAlunoDao.registrar(objMensagem, function (erro) {
+            if (erro) {
+                console.log(erro);
+            }
+            else {
+                res.json({ mensagem: 'retorno' });
+            }
+        });
+    })
 
     app.get('/area-aluno', (req, res) => {
         res.sendFile('dashboard.html', {

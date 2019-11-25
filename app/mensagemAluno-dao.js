@@ -21,15 +21,16 @@ class MensagemAlunoDao {
             })
     }
 
-    registrar(aluno, callback) {
-        /*var ra = aluno.ra;
-        var nome = aluno.nome;
-        var senha = aluno.senha;
-        this._db.query(`INSERT INTO Alunos values('${ra}', '${nome}', '${senha}','offline')`,
+    registrar(objMensagem, callback) {
+        var ra = objMensagem.ra;
+        var mensagem = objMensagem.mensagem;
+        var codMonitor = objMensagem.codMonitor;
+        var ordemMensagem = objMensagem.ordemMensagem;
+        this._db.query(`INSERT INTO MensagensAlunos values('${ra}', '${mensagem}', ${codMonitor},${ordemMensagem},'N')`,
             (err) => {
                 console.log("Erro inserção de aluno: " + err);
                 callback(err);
-            })*/
+            })
     }
 }
 module.exports = MensagemAlunoDao;

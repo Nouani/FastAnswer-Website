@@ -20,16 +20,5 @@ class MensagemMonitorDao {
                 callback(err, recordset);
             })
     }
-
-    registrar(aluno, callback) {
-        /*var ra = aluno.ra;
-        var nome = aluno.nome;
-        var senha = aluno.senha;
-        this._db.query(`INSERT INTO Alunos values('${ra}', '${nome}', '${senha}','offline')`,
-            (err) => {
-                console.log("Erro inserção de aluno: " + err);
-                callback(err);
-            })*/
-    }
 }
 module.exports = MensagemMonitorDao;
