@@ -4,6 +4,7 @@ const excecoes = ['de', 'da', 'do', 'e '];
 var objTable = document.getElementById('corpo-table');
 var objDropdowns = document.getElementsByClassName('notification');
 var objDropdownsDesativar = document.getElementsByClassName('desativa');
+var linkNames = document.getElementsByClassName('link-chat');
 
 var tempoToast = 2000;
 
@@ -113,7 +114,7 @@ function carregarComponentes(nome, ra, disciplina, status, contador) {
 
     ret += `<tr>
                 <td>
-                    <a href="#">
+                    <a id="chat${contador}" href="#" class="link-chat" data-id="chat${contador}" data-ra="${ra}">
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-blue mr-3">${iniciais}</div>
 
@@ -174,6 +175,9 @@ function atribuirClick() {
     for (var i = 0; i < objDropdownsDesativar.length; i++) {
         objDropdownsDesativar[i].addEventListener('click', disable);
     }
+    for (var i = 0; i < linkNames.length; i++) {
+        linkNames[i].addEventListener('click', iniciarChat);
+    }
 }
 
 function active() {
@@ -219,7 +223,14 @@ function disable() {
     console.log(monitoresANotificar);
 }
 
-
+function iniciarChat(){
+    let id = this.getAttribute("data-id");
+    let ra = this.getAttribute("data-ra");
+    $.getJSON('/set-dados-chat/'+ra, function(result){
+        //console.log(result);
+    })
+    $('#'+id).attr('href','/area-aluno/monitoria/conversa');
+}
 
 // TOAST NOTIFICATION
 

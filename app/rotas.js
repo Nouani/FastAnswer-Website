@@ -3,16 +3,22 @@ var LembreteDao = require('../app/lembrete-dao');
 var EventoDao = require('../app/evento-dao');
 var MonitorDao = require('../app/monitor-dao');
 var MateriaDao = require('../app/materia-dao');
+var MensagemAlunoDao = require('../app/mensagemAluno-dao');
+var MensagemMonitorDao = require('../app/mensagemMonitor-dao');
 var conexao = require('../config/custom-mssql');
 var path = require('path');
 
 module.exports = (app) => {
     var dadosAluno = {
-        ra: '19194',
-        nome: '',
+        ra: '19190',
+        nome: 'Matheus Seiji',
         senha: ''
     }
-    var lembreteDao;
+    var dadosChat = {
+        raAluno: '19190',
+        codMonitor: '69',
+        nomeMonitor: 'Enzo Furegatti Spinella',
+    }
 
     app.get('/', (req, res) => {
         alunoDao = new AlunoDao(conexao, null);
@@ -198,7 +204,7 @@ module.exports = (app) => {
     });
 
     app.get('/carregar-monitores', (req, res) => {
-        const monitorDao = new MonitorDao(conexao);
+        const monitorDao = new MonitorDao(conexao, null);
         monitorDao.lista(function (erro, resultados) {
             res.json(resultados["recordset"]);
         });
@@ -218,6 +224,41 @@ module.exports = (app) => {
         });
     })
 
+    app.get('/set-dados-chat/:raMonitor?', (req, res) => {
+        const alunoDao = new AlunoDao(conexao, req.params.raMonitor);
+        const monitorDao = new MonitorDao(conexao, req.params.raMonitor);
+        
+        monitorDao.listaPeloRA(function (erro, resultados) {
+            for (var monitor of resultados["recordset"]){
+                dadosChat.raAluno = dadosAluno.ra;
+                dadosChat.codMonitor = monitor.CodMonitor;
+            }
+            alunoDao.listaPeloRA(function(err, result){
+                for (var aluno of result["recordset"]){
+                    dadosChat.nomeMonitor = aluno.Nome;
+                }
+                res.json(dadosChat);
+            })
+        });
+    });
+
+    app.get('/get-dados-chat', (req, res) => {
+        res.json(dadosChat);
+    });
+
+    app.get('/carregar-mensagens-aluno', (req, res) => {
+         const mensagemAlunoDao = new MensagemAlunoDao(conexao, dadosChat.raAluno, dadosChat.codMonitor);
+         mensagemAlunoDao.listaPeloRA(function(erro, resultados){
+             res.json(resultados["recordset"]);
+         })
+    });
+
+    app.get('/carregar-mensagens-monitor', (req, res) => {
+        const mensagemMonitorDao = new MensagemMonitorDao(conexao, dadosChat.raAluno, dadosChat.codMonitor);
+        mensagemMonitorDao.listaPeloRA(function(erro, resultados){
+            res.json(resultados["recordset"]);
+        })
+   });
 
 
     app.get('/area-aluno', (req, res) => {
@@ -252,6 +293,12 @@ module.exports = (app) => {
 
     app.get('/area-aluno/monitoria', (req, res) => {
         res.sendFile('opcoes/monitoria.html', {
+            root: path.join(__dirname, '../views')
+        });
+    });
+
+    app.get('/area-aluno/monitoria/conversa', (req, res) => {
+        res.sendFile('opcoes/chat-monitoria/chat.html', {
             root: path.join(__dirname, '../views')
         });
     });

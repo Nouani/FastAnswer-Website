@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Conversa</title>
+
+    <!-- CSS DA PÁGINA -->
+    <link rel="stylesheet" href="../../css/dashboard/chat.css">
+
+    <!-- JQUERY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="../../font/fontawesome/css/all.min.css">
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="menu">
+        <div class="back"><i class="fa fa-chevron-left"></i></div>
+        <div class="name" id="nomeMonitor"><!-- CARREGADO DO DB --></div>
+    </div>
+    <ol class="chat" id="chat">
+        <!--<li class="other">
+            <div class="avatar">
+                <h4 class="text-avatar">EF</h4>
+            </div>
+            <div class="msg">
+                <p>Hola!</p>
+                <p>ddddddddddddddddddddddddddddddddddddccccccccccc
+                </p>
+            </div>
+        </li>
+        <li class="self">
+            <div class="avatar">
+                <h4 class="text-avatar">GA</h4>
+            </div>
+            <div class="msg">
+                <p>Puff...</p>
+                <p>Aún estoy haciendo el contexto de Góngora...
+                    <emoji class="books" />
+                </p>
+                <p>Mejor otro día</p>
+            </div>
+        </li>-->
+    </ol>
+    <input class="textarea" type="text" placeholder="Escreva aqui!" />
+    <div class="emojis">
+        <i class="fas fa-paper-plane"></i>
+    </div>
+    <!-- partial -->
+
+    <!-- SCRIPT'S DA PÁGINA -->
+    <script src="../../js/dashboard/carregar-chat.js"></script>
+
+    <!-- SCRIPT FONTES -->
+    <script src="../../font/fontawesome/js/all.min.js"></script>
+</body>
+
+</html>

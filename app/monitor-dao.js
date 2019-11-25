@@ -1,12 +1,20 @@
 class MonitorDao {
 
     // contrutor que vai receber uma instância da conexão do BD chamada db 
-    constructor(db) {
+    constructor(db, ra) {
         this._db = new db.Request();
+        this.ra = ra;
     }
 
     lista(callback) {
         this._db.query('Select * from Monitores',
+            function (err, recordset) {
+                callback(err, recordset);
+            })
+    }
+
+    listaPeloRA(callback) {
+        this._db.query('Select * from Monitores where RA ='+this.ra,
             function (err, recordset) {
                 callback(err, recordset);
             })
