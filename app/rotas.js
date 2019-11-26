@@ -10,15 +10,15 @@ var path = require('path');
 
 module.exports = (app) => {
     var dadosAluno = {
-        ra: '19190',
-        nome: 'Matheus Seiji',
+        ra: '',
+        nome: '',
         senha: ''
     }
     var dadosChat = {
-        raAluno: '19190',
-        codMonitor: '69',
-        nomeAluno: 'Matheus Seiji',
-        nomeMonitor: 'Enzo Furegatti Spinella',
+        raAluno: '',
+        codMonitor: '',
+        nomeAluno: '',
+        nomeMonitor: '',
     }
 
     app.get('/', (req, res) => {
