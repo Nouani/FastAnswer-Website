@@ -1,7 +1,5 @@
-<br />
 <p align="center">
-
-  <img alt="FastAnswer-Logo" src="https://raw.githubusercontent.com/Nouani/FastAnswer-Website/master/public/img/Logo%20Icon.png"/>
+ <img alt="FastAnswer-Logo" src="https://raw.githubusercontent.com/Nouani/FastAnswer-Website/master/public/img/Logo%20Icon.png"/>
 
 
   <h3 align="center">> Web application developed for a second semester project in the IT technical course.</h3>
